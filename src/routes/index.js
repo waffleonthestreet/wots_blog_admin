@@ -8,41 +8,41 @@ import LoadingScreen from "../components/LoadingScreen";
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) => {
-  const {pathname} = useLocation();
+    const {pathname} = useLocation();
 
-  return (
-    <Suspense fallback={<LoadingScreen/>}>
-      <Component {...props} />
-    </Suspense>
-  );
+    return (
+        <Suspense fallback={<LoadingScreen/>}>
+            <Component {...props} />
+        </Suspense>
+    );
 };
 
 export default function Router() {
-  return useRoutes([
-    {
-      path: "auth",
-      children: [
+    return useRoutes([
         {
-          path: "login",
-          element: (
-            <GuestGuard>
-              <Login/>
-            </GuestGuard>
-          ),
+            path: "auth",
+            children: [
+                {
+                    path: "login",
+                    element: (
+                        <GuestGuard>
+                            <Login/>
+                        </GuestGuard>
+                    ),
+                },
+            ],
         },
-      ],
-    },
-    {
-      path: "/",
-      element: <AuthGuard><MainLayout/></AuthGuard>,
-      children: [
-        {element: <MainDashboard/>, index: true},
-        {path: "article-editor", element: <ArticleEditor/>},
-        {path: "articles", element: <ArticleManager/>},
-        {path: "categories", element: <CategoryManager/>},
-      ],
-    },
-  ])
+        {
+            path: "/",
+            element: <AuthGuard><MainLayout/></AuthGuard>,
+            children: [
+                {element: <MainDashboard/>, index: true},
+                {path: "article-editor", element: <ArticleEditor/>},
+                {path: "articles", element: <ArticleManager/>},
+                {path: "categories", element: <CategoryManager/>},
+            ],
+        },
+    ])
 }
 
 const Login = Loadable(lazy(() => import('../views/auth/Login')))

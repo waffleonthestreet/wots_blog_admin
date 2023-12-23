@@ -1,21 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types'
-import {Button} from "@mui/joy";
+import {Button, Input, Stack} from "@mui/joy";
 import useAuth from "../../hooks/useAuth";
+import useInput from "../../hooks/useInput";
 
 const Login = () => {
-  const {login} = useAuth();
+    const [userId, handleChangeUserId] = useInput('');
+    const [userPw, handleChangeUserPw] = useInput('');
 
-  const handleClickLogin = () => {
-    login();
-  }
+    const {login} = useAuth();
 
-  return (
-    <>
-      <div>It's Login</div>
-      <Button onClick={handleClickLogin}>로그인</Button>
-    </>
-  )
+    const handleClickLogin = () => {
+        login(userId, userPw);
+    }
+
+    return (
+        <>
+            <div>It's Login</div>
+            <Stack spacing={2}>
+                <Input value={userId} onChange={handleChangeUserId}/>
+                <Input value={userPw} onChange={handleChangeUserPw} type="password"/>
+                <Button onClick={handleClickLogin}>로그인</Button>
+            </Stack>
+        </>
+    )
 }
 
 export default Login

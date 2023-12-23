@@ -22,6 +22,15 @@ const joyTheme = extendTheme({
         }
       }
     },
+    JoyTextarea: {
+      styleOverrides: {
+        root: {
+          "&:focus-within": {
+            "--Textarea-focusedHighlight": primaryColor,
+          },
+        },
+      },
+    },
     JoyInput: {
       styleOverrides: {
         root: {
