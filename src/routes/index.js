@@ -38,7 +38,8 @@ export default function Router() {
             children: [
                 {element: <MainDashboard/>, index: true},
                 {path: "article-editor", element: <ArticleEditor/>},
-                {path: "articles", element: <ArticleManager/>},
+                {path: "article/:id", element: <ArticleDetails/>},
+                {path: "article-manager", element: <ArticleManager/>},
                 {path: "categories", element: <CategoryManager/>},
             ],
         },
@@ -50,3 +51,4 @@ const MainDashboard = Loadable(lazy(() => import('../views/dashboard/MainDashboa
 const ArticleEditor = Loadable(lazy(() => import('../views/dashboard/ArticleEditor')))
 const ArticleManager = Loadable(lazy(() => import('../views/dashboard/ArticleManager')))
 const CategoryManager = Loadable(lazy(() => import('../views/dashboard/CategoryManager')))
+const ArticleDetails = Loadable(lazy(() => import('../views/dashboard/ArticleDetails')))
