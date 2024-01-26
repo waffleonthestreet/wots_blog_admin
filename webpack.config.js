@@ -36,7 +36,9 @@ module.exports = {
     devServer: { // webpack-dev-server 옵션을 설정합니다.
         port: "5001",
         static: path.resolve(__dirname, 'dist'),
-        historyApiFallback: true, // 404 페이지 대신 index.html로 이동합니다.
+        historyApiFallback: {
+            index: '/index.html',
+        },
         hot: true, // 모듈 전체를 다시 로드하지 않고 변경된 사항만 갱신합니다.
     },
     resolve: { // resolve: import를 할 때 확장자를 생략할 수 있습니다.
